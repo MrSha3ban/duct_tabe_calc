@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAPE-MASTER ULTIMATE | Ahsebhalak</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Cairo:wght@300;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0c0e;
+            --panel-bg: rgba(20, 24, 28, 0.95);
+            --accent-orange: #ff6b00;
+            --accent-blue: #00d4ff;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --border-glow: rgba(255, 107, 0, 0.3);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { box-sizing: border-box; transition: all 0.25s ease; }
+
+        body {
+            background: radial-gradient(circle at center, #1a1d21 0%, var(--bg-dark) 100%);
+            color: var(--text-main);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            background: var(--panel-bg);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.02);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Industrial HUD Elements */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--accent-orange), transparent);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #2d3748;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        input, select {
+            background: #000;
+            border: 1px solid #334155;
+            color: var(--accent-blue);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--accent-orange); box-shadow: 0 0 10px var(--border-glow); }
+
+        .method-card {
+            grid-column: span 2;
+            background: var(--glass);
+            border: 1px dashed #444;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .results-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #2d3748;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .result-item {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .cost-value { color: #4ade80; font-size: 2rem; }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent-orange);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            margin-top: 10px;
+        }
+
+        .method-desc {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 10px;
+            line-height: 1.6;
+            border-right: 3px solid var(--accent-orange);
+            padding-right: 15px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>TAPE-MASTER <span style="font-weight:300">ULTIMATE</span></h1>
+            <div style="font-size: 0.7rem; color: var(--text-dim)">INDUSTRIAL PACKAGING LOGISTICS SYSTEM [AHSEBHALAK]</div>
+        </div>
+        <div style="text-align: left;">
+            <div id="dateDisplay" style="font-family: 'Orbitron'; font-size: 0.8rem;">2026.03.09</div>
+            <div style="color: var(--accent-blue); font-size: 0.6rem;">SYSTEM STATUS: OPTIMAL</div>
+        </div>
+    </header>
+
+    <div class="main-grid">
+        <div class="input-section">
+            <div class="input-group">
+                <label>الطول (Length) سم</label>
+                <input type="number" id="boxL" value="60" oninput="runEngine()">
+            </div>
+            <div class="input-group">
+                <label>العرض (Width) سم</label>
+                <input type="number" id="boxW" value="40" oninput="runEngine()">
+            </div>
+            <div class="input-group">
+                <label>عدد الكراتين</label>
+                <input type="number" id="boxQty" value="100" oninput="runEngine()">
+            </div>
+            <div class="input-group">
+                <label>طول البكرة (متر)</label>
+                <input type="number" id="tapeRoll" value="50" oninput="runEngine()">
+            </div>
+            <div class="input-group">
+                <label>سعر البكرة (جنية)</label>
+                <input type="number" id="rollPrice" value="25" oninput="runEngine()">
+            </div>
+            <div class="input-group">
+                <label>نسبة الهالك %</label>
+                <input type="number" id="wastePct" value="10" oninput="runEngine()">
+            </div>
+
+            <div class="method-card">
+                <label>إستراتيجية اللصق (Sealing Strategy)</label>
+                <select id="sealMode" onchange="runEngine()" style="width: 100%; margin-top: 10px;">
+                    <option value="single">إغلاق منتصف فقط (Top & Bottom Center)</option>
+                    <option value="hseal">نظام H-Seal (الأطراف المنفصلة)</option>
+                    <option value="wrap" selected>نظام المحيط الكامل (Perimeter Wrap)</option>
+                    <option value="cross">التدريع المتقاطع (Cross Reinforcement)</option>
+                </select>
+                <div id="methodNote" class="method-desc">
+                    سيتم حساب لف الشريط حول محيط الكرتونة بالكامل للأعلى والأسفل لضمان أقصى حماية للجانبين المفتوحين.
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <div class="result-item">
+                <span class="result-label">إجمالي الأمتار (صافي + هالك)</span>
+                <div class="result-value" id="outMeters">0 m</div>
+            </div>
+            <div class="result-item">
+                <span class="result-label">عدد البكرات المطلوبة</span>
+                <div class="result-value" id="outRolls" style="color: var(--accent-orange);">0</div>
+                <span class="badge">SPOOLS</span>
+            </div>
+            <div class="result-item" style="border-top: 1px solid #222; padding-top: 20px;">
+                <span class="result-label">التكلفة الإجمالية التقديرية</span>
+                <div class="result-value cost-value" id="outCost">0 EGP</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 AHSEBHALAK INDUSTRIAL SOLUTIONS | DESIGNED BY GENIUS AI
+    </footer>
+</div>
+
+<script>
+    function runEngine() {
+        const L = parseFloat(document.getElementById('boxL').value) || 0;
+        const W = parseFloat(document.getElementById('boxW').value) || 0;
+        const Q = parseFloat(document.getElementById('boxQty').value) || 0;
+        const RL = parseFloat(document.getElementById('tapeRoll').value) || 1;
+        const RP = parseFloat(document.getElementById('rollPrice').value) || 0;
+        const WP = parseFloat(document.getElementById('wastePct').value) || 0;
+        const mode = document.getElementById('sealMode').value;
+        
+        let tapePerBoxCm = 0;
+        let note = "";
+
+        switch(mode) {
+            case 'single':
+                // شريط واحد للمنتصف فوق وتحت + زيادة 10 سم للثبات
+                tapePerBoxCm = (L + 10) * 2;
+                note = "إغلاق اقتصادي لشريط المنتصف فقط. غير مستحسن للشحن الدولي.";
+                break;
+            case 'hseal':
+                // 2 منتصف + 4 جوانب (أطراف منفصلة)
+                tapePerBoxCm = (2 * (L + 10)) + (4 * (W + 10));
+                note = "نظام H-Seal القياسي للملابس الجاهزة. حماية جيدة من الغبار والأتربة.";
+                break;
+            case 'wrap':
+                // محيط كامل مرتين + منتصف مرتين (طريقتك المفضلة)
+                const perimeter = (L + W) * 2;
+                tapePerBoxCm = (perimeter * 2) + (L * 2);
+                note = "نظام المحيط الكامل: يوفر حماية هائلة للجانبين المفتوحين ويمنع العبث بالكرتونة تماماً.";
+                break;
+            case 'cross':
+                // تدريع متقاطع (2 طول + 2 عرض + 2 محيط)
+                tapePerBoxCm = (L * 4) + (W * 4);
+                note = "نظام التدريع المتقاطع: يستخدم للشحنات الثقيلة جداً لضمان عدم انفجار القاع.";
+                break;
+        }
+
+        document.getElementById('methodNote').innerText = note;
+
+        const totalMetersNet = (tapePerBoxCm / 100) * Q;
+        const totalWithWaste = totalMetersNet * (1 + (WP / 100));
+        const rollsNeeded = Math.ceil(totalWithWaste / RL);
+        const totalCost = rollsNeeded * RP;
+
+        document.getElementById('outMeters').innerText = Math.round(totalWithWaste).toLocaleString() + " m";
+        document.getElementById('outRolls').innerText = rollsNeeded;
+        document.getElementById('outCost').innerText = totalCost.toLocaleString() + " EGP";
+    }
+
+    // Initialize
+    window.onload = runEngine;
+</script>
+
+</body>
+</html>
